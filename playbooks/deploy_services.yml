@@ -1,0 +1,25 @@
+---
+- hosts: masters
+  gather_facts: no
+  vars:
+    kubeconfig_path: /etc/kubernetes/admin.conf
+  tasks:
+    - name: Deploy scanner Deployment & Service
+      k8s:
+        kubeconfig: "{{ kubeconfig_path }}"
+        state: present
+        definition: "{{ lookup('file','roles/scanner/templates/scanner-deployment.yml') }}"
+
+    - name: Deploy auth
+      k8s:
+        kubeconfig: "{{ kubeconfig_path }}"
+        state: present
+        definition: "{{ lookup('file','roles/auth/templates/auth-deployment.yml') }}"
+
+    # … repeat for each service …
+
+    - name: Deploy HorizontalPodAutoscaler for scanner
+      k8s:
+        kubeconfig: "{{ kubeconfig_path }}"
+        state: present
+        definition: "{{ lookup('file','roles/scanner/templates/scanner-hpa.yml') }}"

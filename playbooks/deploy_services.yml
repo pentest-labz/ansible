@@ -32,13 +32,13 @@
       k8s:
         kubeconfig: "{{ kubeconfig_path }}"
         state: present
-        definition: "{{ lookup('file','roles/sqlinjector/templates/orchestrator-frontend.yml') }}"    
+        definition: "{{ lookup('file','roles/orchestrator-frontend/templates/orchestrator-frontend.yml') }}"    
 
     - name: Deploy orchestrator-backend
       k8s:
         kubeconfig: "{{ kubeconfig_path }}"
         state: present
-        definition: "{{ lookup('file','roles/sqlinjector/templates/orchestrator-backend.yml') }}"
+        definition: "{{ lookup('file','roles/orchestrator-backend/templates/orchestrator-backend.yml') }}"
 
     - name: Deploy HorizontalPodAutoscaler for scanner
       k8s:

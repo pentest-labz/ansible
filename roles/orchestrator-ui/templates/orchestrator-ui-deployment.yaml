@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orchestrator-frontend
+  name: orchestrator-ui
   labels:
-    app: orchestrator-frontend
+    app: orchestrator-ui
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: orchestrator-frontend
+      app: orchestrator-ui
   template:
     metadata:
       labels:
-        app: orchestrator-frontend
+        app: orchestrator-ui
     spec:
       containers:
-        - name: frontend
-          image: jeromejoseph/orchestrator-frontend:latest
+        - name: orchestrator-ui
+          image: jeromejoseph/orchestrator-ui:latest
           ports:
             - containerPort: 3000
           envFrom:

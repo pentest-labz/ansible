@@ -8,40 +8,71 @@
       k8s:
         kubeconfig: "{{ kubeconfig_path }}"
         state: present
-        definition: "{{ lookup('file','roles/scanner/templates/scanner-deployment.yml') }}"
+        definition: "{{ lookup('file','roles/scanner-service/templates/scanner-service-deployment.yml') }}"
 
-    - name: Deploy auth
+    - name: Deploy auth-service
       k8s:
         kubeconfig: "{{ kubeconfig_path }}"
         state: present
-        definition: "{{ lookup('file','roles/auth/templates/auth-deployment.yml') }}"
+        definition: "{{ lookup('file','roles/auth-service/templates/auth-service-deployment.yml') }}"
     
-    - name: Deploy bruteforce
+    - name: Deploy bruteforce-service
       k8s:
         kubeconfig: "{{ kubeconfig_path }}"
         state: present
-        definition: "{{ lookup('file','roles/bruteforce/templates/brute-force-deployment.yml') }}"
+        definition: "{{ lookup('file','roles/bruteforce-service/templates/bruteforce-service-deployment.yml') }}"
     
-    - name: Deploy sqlinjector
+    - name: Deploy sql-exploit-service
       k8s:
         kubeconfig: "{{ kubeconfig_path }}"
         state: present
-        definition: "{{ lookup('file','roles/sqlinjector/templates/sql-injector-deployment.yml') }}"
+        definition: "{{ lookup('file','roles/sql-exploit-service/templates/sql-exploit-service-deployment.yml') }}"
 
-    - name: Deploy orchestrator-frontend
+    - name: Deploy orchestrator-ui
       k8s:
         kubeconfig: "{{ kubeconfig_path }}"
         state: present
-        definition: "{{ lookup('file','roles/orchestrator-frontend/templates/orchestrator-frontend.yml') }}"    
+        definition: "{{ lookup('file','roles/orchestrator-frontend/templates/orchestrator-ui.yml') }}"    
 
-    - name: Deploy orchestrator-backend
+    - name: Deploy orchestrator-service
       k8s:
         kubeconfig: "{{ kubeconfig_path }}"
         state: present
-        definition: "{{ lookup('file','roles/orchestrator-backend/templates/orchestrator-backend.yml') }}"
+        definition: "{{ lookup('file','roles/orchestrator-backend/templates/orchestrator-service.yml') }}"
 
-    - name: Deploy HorizontalPodAutoscaler for scanner
+    - name: Deploy HorizontalPodAutoscaler for scanner-service
       k8s:
         kubeconfig: "{{ kubeconfig_path }}"
         state: present
-        definition: "{{ lookup('file','roles/scanner/templates/scanner-hpa.yml') }}"
+        definition: "{{ lookup('file','roles/scanner-service/templates/scanner-service-hpa.yml') }}"
+
+    - name: Deploy HorizontalPodAutoscaler for auth-service
+      k8s:
+        kubeconfig: "{{ kubeconfig_path }}"
+        state: present
+        definition: "{{ lookup('file','roles/auth-service/templates/auth-service-hpa.yml') }}"
+    
+    - name: Deploy HorizontalPodAutoscaler for bruteforce-service
+      k8s:
+        kubeconfig: "{{ kubeconfig_path }}"
+        state: present
+        definition: "{{ lookup('file','roles/scanner/templates/bruteforce-service-hpa.yml') }}"
+
+    - name: Deploy HorizontalPodAutoscaler for orchestrator-ui
+      k8s:
+        kubeconfig: "{{ kubeconfig_path }}"
+        state: present
+        definition: "{{ lookup('file','roles/orchestrator-ui/templates/orchestrator-ui-hpa.yml') }}"
+
+    - name: Deploy HorizontalPodAutoscaler for orchestrator-service
+      k8s:
+        kubeconfig: "{{ kubeconfig_path }}"
+        state: present
+        definition: "{{ lookup('file','roles/orchestrator-service/templates/orchestrator-service-hpa.yml') }}"
+
+    - name: Deploy HorizontalPodAutoscaler for sql-exploit-service
+      k8s:
+        kubeconfig: "{{ kubeconfig_path }}"
+        state: present
+        definition: "{{ lookup('file','roles/sql-exploit-service/templates/sql-exploit-service-hpa.yml') }}"
+

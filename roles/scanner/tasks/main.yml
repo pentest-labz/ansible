@@ -8,10 +8,10 @@
   community.docker.docker_image:
     build:
       path: /opt/scanner
-    name: your-registry/scanner
-    tag: "{{ image_tag }}"
+    name: jeromejoseph/scanner
+    tag: "main"
 
 - name: Push image to registry
   community.docker.docker_image:
-    name: your-registry/scanner:{{ image_tag }}
+    name: jeromejoseph/scanner:main
     push: yes
